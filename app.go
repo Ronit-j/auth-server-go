@@ -14,7 +14,7 @@ func main() {
 	sign_up_handler := http.HandlerFunc(handle_sign_up_request)
 	login_handler := http.HandlerFunc(handle_login_request)
 	http.Handle("/login", login_handler)
-	http.Handle("/login", sign_up_handler)
+	http.Handle("/signup", sign_up_handler)
 	http.ListenAndServe(":8080", nil)
 }
 
