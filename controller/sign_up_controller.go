@@ -25,19 +25,18 @@ func Handle_sign_up_request(w http.ResponseWriter, r *http.Request) {
     // respond to the client with the error message and a 400 status code.
     err1 := json.NewDecoder(r.Body).Decode(&u)
     if err1 != nil {
-        http.Error(w, err.Error(), http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprint(w, "Bad request 400")
         return
     }
-
-    // Do something with the Person struct...
-    fmt.Fprintf(w, "User: %+v", u)
-	fmt.Printf("UserL")
+    
 	result := db.Create(&u)
 	if result.Error != nil {
-		// log.Fatal(result.Error)
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprint(w, "User name already exists")
 		return 
 	}
+	fmt.Fprintf(w, "User: %+v", u)
 	defer db.Close()
 	return
 }
