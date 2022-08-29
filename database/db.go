@@ -12,10 +12,9 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var db *gorm.DB
 
 // ConnectDB function: Make database connection
-func ConnectDB() {
+func ConnectDB() *gorm.DB {
 
 	//Load environmental variables
 	err := godotenv.Load()
@@ -33,18 +32,17 @@ func ConnectDB() {
 	dbURI := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=disable password=%s", databaseHost, username, databaseName, password)
 
 	//connect to db URI
-	db, err := gorm.Open("postgres", dbURI)
+	Db, err := gorm.Open("postgres", dbURI)
 
 	if err != nil {
 		fmt.Println("error", err)
 		panic(err)
 	}
-	// close db when not in use
-	defer db.Close()
 
 	// Migrate the schema
-	db.AutoMigrate(
+	Db.AutoMigrate(
 		&model.User{})
 
-	fmt.Println("Successfully connected!", db)
+	fmt.Println("Successfully connected!", Db)
+	return Db
 }

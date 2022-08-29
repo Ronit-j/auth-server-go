@@ -7,8 +7,8 @@ import (
 // User struct declaration
 type User struct {
 	gorm.Model
-	Name     string
-	Email    string `gorm:"type:varchar(100);unique_index"`
-	Salt     string
-	Verifier string
+	Name     string `json:"name"`
+	Username    string `json:"username"`
+	Salt     string `json:"salt"`
+	Verifier string `json:"verifier"`
 }

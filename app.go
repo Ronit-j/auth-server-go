@@ -10,8 +10,8 @@ import (
 )
 
 func main() {
-	// start db connection
-	database.ConnectDB()
+	// start initial db connection
+	
 	sign_up_handler := http.HandlerFunc(controller.Handle_sign_up_request)
 	login_handler := http.HandlerFunc(controller.Handle_login_request)
 	http.Handle("/login", login_handler)
