@@ -13,6 +13,14 @@ import (
 )
 
 
+func Get_user_security_information(user_email string) model.User {
+	db := ConnectDB()
+	// Get first matched record where email is user_email
+	var user model.User
+	db.Where("Username= ?", user_email).First(&user)
+	return user
+}
+
 // ConnectDB function: Make database connection
 func ConnectDB() *gorm.DB {
 
@@ -42,7 +50,8 @@ func ConnectDB() *gorm.DB {
 	// Migrate the schema
 	Db.AutoMigrate(
 		&model.User{})
-
+	Db.AutoMigrate(
+		&model.Authentication_User{})
 	fmt.Println("Successfully connected!", Db)
 	return Db
 }
