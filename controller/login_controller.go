@@ -25,9 +25,8 @@ func Handle_login_request(w http.ResponseWriter, r *http.Request) {
         panic(err)
     }
 	
-	// Get the salt of the user from the username
+	// Get the password hash of the user from the username
 	var user model.User
-	fmt.Print(login.Password)
 	user = database.Get_user_security_information(login.Username)
 	w.Header().Set("Content-Type", "application/json")
 	if strconv.FormatUint(uint64(utils.Hash(login.Password)),10)!=user.Password {
