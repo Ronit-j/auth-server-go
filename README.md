@@ -3,10 +3,9 @@ This is a simple auth server implementation in Go
 
 ### Basic Introduction
 
-The aim of this project is to learn about the go eco-system and server code in go and implement the basic authentication using the SRP protocal where we do not store the password at all.
+The aim of this project is to learn about the go eco-system and server code in go and implement the basic authentication. 
 
-SRP is a protocol where we do not store user password anywhere and only store a random salt to derive a hash which would be same for the combination of password and username.
-It is a key exchange protocol based on Diffie-Hellman and part of AKE protocol family.
+Future scope - try to implement srp protocol
 
 Advantages:
 
