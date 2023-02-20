@@ -9,6 +9,5 @@ type User struct {
 	gorm.Model
 	Name     string `json:"name"`
 	Username    string `json:"username"`
-	Salt     string `json:"salt"`
-	Verifier string `json:"verifier"`
+	Password     string `json:"password"`
 }
