@@ -4,9 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-
 	"github.com/auth-server-go/model"
-
 	"github.com/jinzhu/gorm" //Gorm postgres dialect interface
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -50,8 +48,7 @@ func ConnectDB() *gorm.DB {
 	// Migrate the schema
 	Db.AutoMigrate(
 		&model.User{})
-	Db.AutoMigrate(
-		&model.Authentication_User{})
+
 	fmt.Println("Successfully connected!", Db)
 	return Db
 }
