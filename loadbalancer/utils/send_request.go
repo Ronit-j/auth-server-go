@@ -1,19 +1,24 @@
 package utils
 
+import (
+	"fmt"
+	"io"
+	"net/http"
+)
 
-func send_request(url, request){
-
-	resp, err := http.Post(url, "application/json", request)
-	//Handle Error
+// SendRequest posts the given request body to the provided URL and returns the
+// response body. The caller is responsible for interpreting the returned data.
+func SendRequest(url string, body io.Reader) ([]byte, error) {
+	resp, err := http.Post(url, "application/json", body)
 	if err != nil {
-		log.Fatalf("An Error Occured %v", err)
+		return nil, fmt.Errorf("failed to send request: %w", err)
 	}
 	defer resp.Body.Close()
-	//Read the response body
-	body, err := ioutil.ReadAll(resp.Body)
+
+	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalln(err)
+		return nil, fmt.Errorf("failed to read response body: %w", err)
 	}
-	sb := string(body)
-	return body
+
+	return respBody, nil
 }
